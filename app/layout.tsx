@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { GlowProvider } from '@/components/context/GlowContext';
 import AmbientGlows from '@/components/common/AmbientGlows';
-import PillNavbar from '@/components/nav/PillNavbar';
-import HudFooter from '@/components/common/HudFooter';
 import OptionsModal from '@/components/splash/OptionsModal';
 
 export const metadata: Metadata = {
@@ -62,12 +60,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-background font-body-md text-on-surface min-h-screen relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+      <body className="bg-background font-body-md text-on-surface h-[100dvh] w-full overflow-hidden select-none selection:bg-primary-container selection:text-on-primary-container">
         <GlowProvider>
           <AmbientGlows />
-          <PillNavbar />
-          <main className="relative z-10 w-full min-h-screen flex flex-col">{children}</main>
-          <HudFooter />
+          {children}
           <OptionsModal />
         </GlowProvider>
       </body>

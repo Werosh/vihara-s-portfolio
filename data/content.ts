@@ -3,6 +3,7 @@ export interface SoftwareSkill {
   name: string;
   short: string;
   level: string;
+  percentage: number;
   category: string;
   iconType: 'text' | 'symbol';
   icon: string;
@@ -41,7 +42,6 @@ export interface SocialLink {
   platform: 'github' | 'linkedin' | 'behance' | 'instagram' | 'email';
   url: string;
   handle: string;
-  angleDeg: number; // for circular orbit placement
 }
 
 export const PERSONAL_INFO = {
@@ -75,12 +75,71 @@ export const PERSONAL_INFO = {
   ],
 };
 
-export const SOFTWARE_SKILLS: SoftwareSkill[] = [
+export const AI_SKILLS: SoftwareSkill[] = [
+  {
+    id: "python",
+    name: "PYTHON (CORE)",
+    short: "Py",
+    level: "CORE / SCRIPTING",
+    percentage: 90,
+    category: "Languages",
+    iconType: "symbol",
+    icon: "terminal",
+    accent: "primary",
+  },
+  {
+    id: "ml",
+    name: "MACHINE LEARNING",
+    short: "ML",
+    level: "MODELS & EVAL",
+    percentage: 82,
+    category: "PyTorch & Algorithms",
+    iconType: "symbol",
+    icon: "psychology",
+    accent: "primary",
+  },
+  {
+    id: "data-structures",
+    name: "DATA STRUCTURES",
+    short: "DS",
+    level: "ALGORITHMS",
+    percentage: 85,
+    category: "SLIIT Computing",
+    iconType: "symbol",
+    icon: "account_tree",
+    accent: "tertiary",
+  },
+  {
+    id: "git",
+    name: "GIT & GITHUB",
+    short: "Git",
+    level: "VERSION CONTROL",
+    percentage: 88,
+    category: "DevOps & CI/CD",
+    iconType: "symbol",
+    icon: "fork_left",
+    accent: "surface",
+  },
+  {
+    id: "office",
+    name: "MS OFFICE SUITE",
+    short: "Docs",
+    level: "DATA & REPORTS",
+    percentage: 92,
+    category: "Analysis & Docs",
+    iconType: "symbol",
+    icon: "description",
+    accent: "primary",
+  },
+];
+
+export const DESIGN_SKILLS: SoftwareSkill[] = [
   {
     id: "photoshop",
-    name: "PHOTOSHOP",
+    name: "ADOBE PHOTOSHOP",
     short: "Ps",
     level: "ADVANCED",
+    percentage: 94,
     category: "Raster / Key Art",
     iconType: "text",
     icon: "Ps",
@@ -88,9 +147,10 @@ export const SOFTWARE_SKILLS: SoftwareSkill[] = [
   },
   {
     id: "illustrator",
-    name: "ILLUSTRATOR",
+    name: "ADOBE ILLUSTRATOR",
     short: "Ai",
     level: "EXPERT",
+    percentage: 96,
     category: "Vector / Branding",
     iconType: "text",
     icon: "Ai",
@@ -98,45 +158,40 @@ export const SOFTWARE_SKILLS: SoftwareSkill[] = [
   },
   {
     id: "canva",
-    name: "CANVA",
+    name: "CANVA PRO",
     short: "Canva",
     level: "SOCIAL SPRINT",
-    category: "Quick Collateral",
+    percentage: 92,
+    category: "Fast Turnaround",
     iconType: "symbol",
     icon: "auto_fix_high",
     accent: "tertiary",
   },
   {
-    id: "python",
-    name: "PYTHON",
-    short: "Py",
-    level: "CORE / ML",
-    category: "PyTorch & Data",
+    id: "logo-design",
+    name: "LOGO & BRAND IDENTITY",
+    short: "Logo",
+    level: "EXPERT",
+    percentage: 95,
+    category: "Vector Geometry",
     iconType: "symbol",
-    icon: "terminal",
-    accent: "primary",
+    icon: "palette",
+    accent: "secondary",
   },
   {
-    id: "git",
-    name: "GIT / GITHUB",
-    short: "Git",
-    level: "VERSION CTRL",
-    category: "Repo & Collaboration",
+    id: "social-media",
+    name: "SOCIAL MEDIA DESIGN",
+    short: "Social",
+    level: "CAMPAIGNS",
+    percentage: 95,
+    category: "Zentra Gym & Clients",
     iconType: "symbol",
-    icon: "fork_left",
-    accent: "surface",
-  },
-  {
-    id: "msoffice",
-    name: "MS OFFICE",
-    short: "Office",
-    level: "DOCS & DATA",
-    category: "Docs & Analysis",
-    iconType: "symbol",
-    icon: "description",
+    icon: "campaign",
     accent: "primary",
   },
 ];
+
+export const SOFTWARE_SKILLS: SoftwareSkill[] = [...AI_SKILLS, ...DESIGN_SKILLS];
 
 export const EDUCATION_DATA: EducationItem[] = [
   {
@@ -210,34 +265,29 @@ export const SOCIAL_LINKS: SocialLink[] = [
     platform: "linkedin",
     url: "https://linkedin.com",
     handle: "Rashmi Vihara",
-    angleDeg: 0,
   },
   {
     name: "GitHub",
     platform: "github",
     url: "https://github.com",
     handle: "rashmi-vihara",
-    angleDeg: 72,
   },
   {
     name: "Behance",
     platform: "behance",
     url: "https://behance.net",
     handle: "rashmivihara",
-    angleDeg: 144,
   },
   {
     name: "Instagram",
     platform: "instagram",
     url: "https://instagram.com",
     handle: "@vihara.designs",
-    angleDeg: 216,
   },
   {
     name: "Email",
     platform: "email",
     url: `mailto:${PERSONAL_INFO.email}`,
     handle: PERSONAL_INFO.email,
-    angleDeg: 288,
   },
 ];
