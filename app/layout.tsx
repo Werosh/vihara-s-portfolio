@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { GlowProvider } from '@/components/context/GlowContext';
 import AmbientGlows from '@/components/common/AmbientGlows';
 
 export const viewport: Viewport = {
@@ -73,10 +72,8 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Offside&display=swap" rel="stylesheet" />
       </head>
       <body className="bg-background font-body-md text-on-surface h-[100dvh] w-full overflow-hidden select-none selection:bg-blue-900 selection:text-white">
-        <GlowProvider>
-          <AmbientGlows />
-          {children}
-        </GlowProvider>
+        <AmbientGlows />
+        {children}
       </body>
     </html>
   );
