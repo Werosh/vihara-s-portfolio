@@ -68,6 +68,7 @@ export const PERSONAL_INFO = {
   cvPath: "/Rashmi_Vihara_CV.pdf",
   portraitPath: "/images/portrait.png",
   bio: "I am a second-year Artificial Intelligence undergraduate at SLIIT and a freelance graphic designer based in Sri Lanka. I work with local businesses to build clear brand identities, logos, and digital campaign graphics while completing coursework in machine learning and data structures.",
+  hudVersion: "v2.6",
 };
 
 /* Clean Text-based Skills (No fake percentages, concrete context) */
@@ -231,26 +232,20 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: "LinkedIn",
     platform: "linkedin",
-    url: "https://linkedin.com",
-    handle: "Rashmi Vihara",
+    url: "https://www.linkedin.com/in/rashmi-vihara-69710a41a/",
+    handle: "rashmi-vihara",
   },
   {
     name: "GitHub",
     platform: "github",
-    url: "https://github.com",
-    handle: "rashmi-vihara",
-  },
-  {
-    name: "Behance",
-    platform: "behance",
-    url: "https://behance.net",
-    handle: "rashmivihara",
+    url: "https://github.com/vihararashmi2-lab",
+    handle: "vihararashmi2-lab",
   },
   {
     name: "Instagram",
     platform: "instagram",
-    url: "https://instagram.com",
-    handle: "@vihara.designs",
+    url: "https://www.instagram.com/vih_r_sh/",
+    handle: "@vih_r_sh",
   },
   {
     name: "Email",
