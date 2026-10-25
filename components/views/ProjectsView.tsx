@@ -177,17 +177,24 @@ export default function ProjectsView() {
                 {activeProject.description}
               </p>
 
-              <div className="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-xs font-label-sm">
-                <div className="flex items-center gap-1.5 text-on-surface-variant">
-                  <span>DELIVERABLES:</span>
-                  <span className="text-on-surface font-semibold truncate max-w-[200px] sm:max-w-xs">
-                    {activeProject.deliverables.join(' • ')}
+              <div className="flex flex-col gap-1.5 pt-2 border-t border-outline-variant/20 text-xs font-label-sm">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-on-surface-variant truncate">
+                    <span>DELIVERABLES:</span>
+                    <span className="text-on-surface font-semibold truncate max-w-[180px] sm:max-w-xs">
+                      {activeProject.deliverables.join(' • ')}
+                    </span>
+                  </div>
+                  <span className="text-[#b8a9e6] font-bold tracking-wider flex items-center gap-1 shrink-0">
+                    EXPAND CASE
+                    <span className="material-symbols-outlined text-sm">visibility</span>
                   </span>
                 </div>
-                <span className="text-[#b8a9e6] font-bold tracking-wider flex items-center gap-1 shrink-0">
-                  EXPAND CASE
-                  <span className="material-symbols-outlined text-sm">visibility</span>
-                </span>
+                {activeProject.credit && (
+                  <div className="text-[10px] text-outline flex items-center gap-1 truncate">
+                    <span className="text-primary font-semibold">Credit:</span> {activeProject.credit}
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

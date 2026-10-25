@@ -154,8 +154,35 @@ export default function ProjectLightboxModal({ project, onClose }: ProjectLightb
               </div>
             </div>
 
+            {/* Project Credit Line */}
+            {project.credit && (
+              <div className="p-3.5 rounded-xl bg-surface-container-high/60 border border-outline-variant/30 flex items-start gap-3">
+                <span className="material-symbols-outlined text-primary text-lg mt-0.5">group</span>
+                <div className="flex flex-col">
+                  <span className="font-label-sm text-[10px] text-outline uppercase tracking-wider">
+                    PROJECT CREDIT
+                  </span>
+                  <span className="font-body-sm text-xs sm:text-sm text-on-surface font-medium">
+                    {project.credit}
+                  </span>
+                </div>
+              </div>
+            )}
+
             {/* Modal Actions */}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-outline-variant/20">
+            <div className="flex items-center justify-between gap-3 pt-4 border-t border-outline-variant/20">
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2 rounded-full bg-[#b8a9e6] hover:bg-[#cfbef5] text-[#1c0e4f] font-label-md text-xs tracking-wider font-bold shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <span>VISIT LIVE DEMO</span>
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+              ) : <div />}
+
               <button
                 onClick={onClose}
                 className="px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md text-xs tracking-wider font-bold shadow-md hover:bg-[#43aaff] transition-colors cursor-pointer"

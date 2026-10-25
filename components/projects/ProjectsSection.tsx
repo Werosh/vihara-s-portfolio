@@ -10,9 +10,15 @@ export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const categories: { label: ProjectCategory; count: string }[] = [
-    { label: 'ALL', count: '08' },
-    { label: 'BRAND & DESIGN', count: '05' },
-    { label: 'AI & ML', count: '03' },
+    { label: 'ALL', count: String(PROJECTS.length).padStart(2, '0') },
+    {
+      label: 'BRAND & DESIGN',
+      count: String(PROJECTS.filter((p) => p.category === 'BRAND & DESIGN').length).padStart(2, '0'),
+    },
+    {
+      label: 'AI & ML',
+      count: String(PROJECTS.filter((p) => p.category === 'AI & ML').length).padStart(2, '0'),
+    },
   ];
 
   const filteredProjects = activeCategory === 'ALL'

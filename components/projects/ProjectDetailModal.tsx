@@ -153,7 +153,34 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
               </div>
             </div>
 
-            <div className="flex justify-end pt-2">
+            {/* Project Credit Line if collaborative */}
+            {project.credit && (
+              <div className="p-3 rounded-xl bg-surface-container-high/60 border border-outline-variant/30 flex items-start gap-2.5">
+                <span className="material-symbols-outlined text-primary text-base mt-0.5">group</span>
+                <div className="flex flex-col">
+                  <span className="font-label-sm text-[9px] text-outline uppercase tracking-wider">
+                    CREDIT
+                  </span>
+                  <span className="font-body-sm text-xs text-on-surface font-medium">
+                    {project.credit}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center justify-between pt-2 border-t border-outline-variant/20 gap-3">
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-1.5 rounded-full bg-[#b8a9e6] hover:bg-[#cfbef5] text-[#1c0e4f] font-label-md text-xs tracking-wider font-bold shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                >
+                  <span>LIVE DEMO</span>
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+              ) : <div />}
+
               <button
                 onClick={onClose}
                 className="px-5 py-1.5 rounded-full bg-primary-container text-on-primary-container font-label-md text-xs tracking-wider font-bold shadow-md hover:bg-[#43aaff] transition-colors cursor-pointer"
