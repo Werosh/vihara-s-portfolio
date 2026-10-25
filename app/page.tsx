@@ -17,6 +17,7 @@ export default function Home() {
   const [direction, setDirection] = useState<number>(1);
   const isCooldown = useRef(false);
   const touchStartX = useRef<number | null>(null);
+  const mainRef = useRef<HTMLElement | null>(null);
 
   // Sync tab with URL hash
   const switchTab = useCallback((nextTab: TabKey) => {
@@ -32,6 +33,12 @@ export default function Home() {
           window.history.replaceState(null, '', targetHash || window.location.pathname);
         }
       }
+
+      // Reset scroll position of main viewport when switching tabs
+      if (mainRef.current) {
+        mainRef.current.scrollTop = 0;
+      }
+
       return nextTab;
     });
   }, []);
@@ -64,13 +71,24 @@ export default function Home() {
     }
   }, [activeTab, switchTab]);
 
-  // Mouse wheel debounced listener (one step per gesture)
+  // Mouse wheel debounced listener
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if ((e.target as HTMLElement)?.closest('[role="dialog"]')) return;
+
+      // If user is scrolling an internally scrollable area that hasn't hit its edge, let it scroll naturally
+      const mainEl = mainRef.current;
+      if (mainEl && mainEl.scrollHeight > mainEl.clientHeight) {
+        const atTop = mainEl.scrollTop <= 5 && e.deltaY < 0;
+        const atBottom = mainEl.scrollTop + mainEl.clientHeight >= mainEl.scrollHeight - 5 && e.deltaY > 0;
+        if (!atTop && !atBottom) {
+          return;
+        }
+      }
+
       if (isCooldown.current) return;
 
-      if (Math.abs(e.deltaY) > 25) {
+      if (Math.abs(e.deltaY) > 30) {
         isCooldown.current = true;
         if (e.deltaY > 0) {
           stepNext();
@@ -79,7 +97,7 @@ export default function Home() {
         }
         setTimeout(() => {
           isCooldown.current = false;
-        }, 400);
+        }, 450);
       }
     };
 
@@ -106,7 +124,7 @@ export default function Home() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [stepNext, stepPrev]);
 
-  // Touch swipe support
+  // Touch swipe support (only trigger if horizontal swipe > 60px)
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -115,7 +133,7 @@ export default function Home() {
     if (touchStartX.current === null) return;
     const touchEndX = e.changedTouches[0].clientX;
     const diff = touchEndX - touchStartX.current;
-    if (Math.abs(diff) > 50) {
+    if (Math.abs(diff) > 60) {
       if (diff < 0) {
         stepNext();
       } else {
@@ -153,13 +171,17 @@ export default function Home() {
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full h-[100dvh] overflow-hidden flex flex-col justify-between bg-[#0B0F17]"
+      className="app-grid-shell select-none"
     >
-      {/* Persistent Top Navigation Bar */}
+      {/* ROW 1: Persistent Header in Grid Flow */}
       <TopPersistentNav activeTab={activeTab} onSelectTab={switchTab} />
 
-      {/* Main Single-Viewport Stage */}
-      <main className="relative z-10 w-full flex-1 pt-16 sm:pt-20 pb-16 sm:pb-12 overflow-y-auto md:overflow-hidden flex items-center justify-center">
+      {/* ROW 2: Main Viewport (Takes remaining height, scrolls internally if needed, NEVER overlapped) */}
+      <main
+        ref={mainRef}
+        id="main-content"
+        className="app-main-viewport flex flex-col items-center"
+      >
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={activeTab}
@@ -168,7 +190,7 @@ export default function Home() {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-full h-full flex items-center justify-center"
+            className="w-full min-h-full flex flex-col justify-start md:justify-center p-4 sm:p-6 lg:p-8"
           >
             {activeTab === 'splash' && <SplashView onSelectTab={switchTab} />}
             {activeTab === 'profile' && <ProfileView onSelectTab={switchTab} />}
@@ -179,7 +201,7 @@ export default function Home() {
         </AnimatePresence>
       </main>
 
-      {/* Persistent Bottom Progress Dots */}
+      {/* ROW 3: Persistent Footer in Grid Flow (Desktop pagination / Mobile navigation) */}
       <BottomProgressDots activeTab={activeTab} onSelectTab={switchTab} />
     </div>
   );
