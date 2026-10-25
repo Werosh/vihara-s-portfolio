@@ -1,3 +1,10 @@
+export interface TextSkillItem {
+  id: string;
+  name: string;
+  description: string;
+  category: 'AI' | 'Design';
+}
+
 export interface SoftwareSkill {
   id: string;
   name: string;
@@ -15,7 +22,7 @@ export interface EducationItem {
   institution: string;
   degree: string;
   period: string;
-  status: 'ACTIVE / CURRENT' | 'COMPLETED';
+  status: string;
   highlights: string[];
 }
 
@@ -24,7 +31,7 @@ export interface ExperienceItem {
   company: string;
   role: string;
   period: string;
-  status: 'ACTIVE' | 'COMPLETED';
+  status: string;
   highlights: string[];
   description: string;
 }
@@ -47,7 +54,6 @@ export interface SocialLink {
 export const PERSONAL_INFO = {
   fullName: "Rashmi Vihara Gimhani Thennakoon",
   shortName: "Rashmi Vihara",
-  callsign: "RASHMI V.",
   monogram: "RV",
   headline: "PORTFOLIO",
   headlineYear: "2026",
@@ -55,140 +61,102 @@ export const PERSONAL_INFO = {
     "AI UNDERGRADUATE",
     "GRAPHIC DESIGNER",
   ],
-  status: "ACTIVE // AVAILABLE FOR COLLABS",
-  systemReady: "SYSTEM READY",
-  version: "VER 2026.04_AI",
-  nodeId: "NODE.ID: 947-TK",
-  hudVersion: "HUD v2.6 // THENNAKOON",
-  clearance: "SEC-01 CLEARANCE",
-  coordinates: "LAT 06°55′N // LON 79°50′E",
+  roleTitle: "AI Undergraduate & Graphic Designer",
+  status: "Open to internships and freelance design work",
   location: "Colombo, Sri Lanka",
   email: "vihararashmi2@gmail.com",
   cvPath: "/Rashmi_Vihara_CV.pdf",
   portraitPath: "/images/portrait.png",
-  bio: "Undergraduate Artificial Intelligence student at SLIIT with a strong interest in machine learning and data-driven problem solving. I also work as a Social Media Post Manager and freelance graphic and logo designer, building brand identities and delivering client work on deadline.",
-  operatorBadges: [
-    { label: "CORE FOCUS", value: "AI & DATA SYSTEMS", color: "text-primary" },
-    { label: "CREATIVE DISCIPLINE", value: "BRAND IDENTITY", color: "text-on-surface" },
-    { label: "DISPATCH LOCATION", value: "SRI LANKA (UTC+5:30)", color: "text-on-surface" },
-    { label: "PROTOCOL WORKFLOW", value: "AGILE / CREATIVE", color: "text-secondary" },
-  ],
+  bio: "I am a second-year Artificial Intelligence undergraduate at SLIIT and a freelance graphic designer based in Sri Lanka. I work with local businesses to build clear brand identities, logos, and digital campaign graphics while completing coursework in machine learning and data structures.",
 };
 
-export const AI_SKILLS: SoftwareSkill[] = [
+/* Clean Text-based Skills (No fake percentages, concrete context) */
+export const AI_SKILLS_LIST: TextSkillItem[] = [
   {
     id: "python",
-    name: "PYTHON (CORE)",
-    short: "Py",
-    level: "CORE / SCRIPTING",
-    percentage: 90,
-    category: "Languages",
-    iconType: "symbol",
-    icon: "terminal",
-    accent: "primary",
+    name: "Python",
+    description: "Coursework, algorithms, and data analysis scripting.",
+    category: "AI",
   },
   {
     id: "ml",
-    name: "MACHINE LEARNING",
-    short: "ML",
-    level: "MODELS & EVAL",
-    percentage: 82,
-    category: "PyTorch & Algorithms",
-    iconType: "symbol",
-    icon: "psychology",
-    accent: "primary",
+    name: "Machine Learning",
+    description: "Model training, supervised learning concepts, and PyTorch basics.",
+    category: "AI",
   },
   {
-    id: "data-structures",
-    name: "DATA STRUCTURES",
-    short: "DS",
-    level: "ALGORITHMS",
-    percentage: 85,
-    category: "SLIIT Computing",
-    iconType: "symbol",
-    icon: "account_tree",
-    accent: "tertiary",
+    id: "dsa",
+    name: "Data Structures & Algorithms",
+    description: "Core computing curriculum and problem solving at SLIIT.",
+    category: "AI",
   },
   {
     id: "git",
-    name: "GIT & GITHUB",
-    short: "Git",
-    level: "VERSION CONTROL",
-    percentage: 88,
-    category: "DevOps & CI/CD",
-    iconType: "symbol",
-    icon: "fork_left",
-    accent: "surface",
+    name: "Git & GitHub",
+    description: "Version control, branching workflows, and project repositories.",
+    category: "AI",
   },
   {
-    id: "office",
-    name: "MS OFFICE SUITE",
-    short: "Docs",
-    level: "DATA & REPORTS",
-    percentage: 92,
-    category: "Analysis & Docs",
-    iconType: "symbol",
-    icon: "description",
-    accent: "primary",
+    id: "docs",
+    name: "Technical Documentation",
+    description: "Structured project reports, analysis write-ups, and data summaries.",
+    category: "AI",
   },
 ];
 
-export const DESIGN_SKILLS: SoftwareSkill[] = [
+export const DESIGN_SKILLS_LIST: TextSkillItem[] = [
   {
-    id: "photoshop",
-    name: "ADOBE PHOTOSHOP",
-    short: "Ps",
-    level: "ADVANCED",
-    percentage: 94,
-    category: "Raster / Key Art",
-    iconType: "text",
-    icon: "Ps",
-    accent: "primary",
+    id: "ps",
+    name: "Adobe Photoshop",
+    description: "Social media graphics, key art composites, and photo retouching.",
+    category: "Design",
   },
   {
-    id: "illustrator",
-    name: "ADOBE ILLUSTRATOR",
-    short: "Ai",
-    level: "EXPERT",
-    percentage: 96,
-    category: "Vector / Branding",
-    iconType: "text",
-    icon: "Ai",
-    accent: "secondary",
+    id: "ai",
+    name: "Adobe Illustrator",
+    description: "Vector logo design, geometric brand marks, and print-ready vectors.",
+    category: "Design",
   },
   {
     id: "canva",
-    name: "CANVA PRO",
-    short: "Canva",
-    level: "SOCIAL SPRINT",
-    percentage: 92,
-    category: "Fast Turnaround",
-    iconType: "symbol",
-    icon: "auto_fix_high",
-    accent: "tertiary",
+    name: "Canva Pro",
+    description: "Fast-turnaround promotional material and client social content.",
+    category: "Design",
   },
   {
-    id: "logo-design",
-    name: "LOGO & BRAND IDENTITY",
-    short: "Logo",
-    level: "EXPERT",
-    percentage: 95,
-    category: "Vector Geometry",
-    iconType: "symbol",
-    icon: "palette",
-    accent: "secondary",
+    id: "brand",
+    name: "Brand & Identity Design",
+    description: "Typography systems, color palettes, and visual style guides.",
+    category: "Design",
   },
   {
-    id: "social-media",
-    name: "SOCIAL MEDIA DESIGN",
-    short: "Social",
-    level: "CAMPAIGNS",
-    percentage: 95,
-    category: "Zentra Gym & Clients",
-    iconType: "symbol",
-    icon: "campaign",
-    accent: "primary",
+    id: "social",
+    name: "Social Media Campaigns",
+    description: "Engagement posts, workout promotional series, and client banners.",
+    category: "Design",
   },
+];
+
+export const LANGUAGES_TEXT_LIST = [
+  { name: "Sinhala", level: "Native" },
+  { name: "English", level: "Professional Working Proficiency" },
+];
+
+/* Backward-compatible exports */
+export const AI_SKILLS: SoftwareSkill[] = [
+  { id: "python", name: "PYTHON", short: "Py", level: "CORE", percentage: 90, category: "Languages", iconType: "symbol", icon: "terminal", accent: "primary" },
+  { id: "ml", name: "MACHINE LEARNING", short: "ML", level: "MODELS", percentage: 82, category: "PyTorch & Algorithms", iconType: "symbol", icon: "psychology", accent: "primary" },
+  { id: "data-structures", name: "DATA STRUCTURES", short: "DS", level: "ALGORITHMS", percentage: 85, category: "SLIIT Computing", iconType: "symbol", icon: "account_tree", accent: "tertiary" },
+  { id: "git", name: "GIT & GITHUB", short: "Git", level: "VERSION CONTROL", percentage: 88, category: "DevOps", iconType: "symbol", icon: "fork_left", accent: "surface" },
+  { id: "office", name: "MS OFFICE SUITE", short: "Docs", level: "ANALYSIS", percentage: 92, category: "Documentation", iconType: "symbol", icon: "description", accent: "primary" },
+];
+
+export const DESIGN_SKILLS: SoftwareSkill[] = [
+  { id: "photoshop", name: "ADOBE PHOTOSHOP", short: "Ps", level: "ADVANCED", percentage: 94, category: "Raster / Key Art", iconType: "text", icon: "Ps", accent: "primary" },
+  { id: "illustrator", name: "ADOBE ILLUSTRATOR", short: "Ai", level: "EXPERT", percentage: 96, category: "Vector / Branding", iconType: "text", icon: "Ai", accent: "secondary" },
+  { id: "canva", name: "CANVA PRO", short: "Canva", level: "SOCIAL SPRINT", percentage: 92, category: "Fast Turnaround", iconType: "symbol", icon: "auto_fix_high", accent: "tertiary" },
+  { id: "logo-design", name: "LOGO & BRAND IDENTITY", short: "Logo", level: "EXPERT", percentage: 95, category: "Vector Geometry", iconType: "symbol", icon: "palette", accent: "secondary" },
+  { id: "social-media", name: "SOCIAL MEDIA DESIGN", short: "Social", level: "CAMPAIGNS", percentage: 95, category: "Zentra Gym & Clients", iconType: "symbol", icon: "campaign", accent: "primary" },
 ];
 
 export const SOFTWARE_SKILLS: SoftwareSkill[] = [...AI_SKILLS, ...DESIGN_SKILLS];
@@ -196,27 +164,27 @@ export const SOFTWARE_SKILLS: SoftwareSkill[] = [...AI_SKILLS, ...DESIGN_SKILLS]
 export const EDUCATION_DATA: EducationItem[] = [
   {
     id: "sliit",
-    institution: "SLIIT",
-    degree: "BSc (Hons) in Information Technology, Specializing in AI",
-    period: "2023 - 2029",
-    status: "ACTIVE / CURRENT",
+    institution: "SLIIT (Sri Lanka Institute of Information Technology)",
+    degree: "BSc (Hons) in Information Technology — Specializing in Artificial Intelligence",
+    period: "2023 – 2027",
+    status: "In Progress",
     highlights: [
-      "Artificial Intelligence",
+      "Artificial Intelligence fundamentals",
       "Data Structures & Algorithms",
-      "Machine Learning",
-      "Databases",
+      "Machine Learning & Data Science",
+      "Database Management Systems",
     ],
   },
   {
     id: "ibbagamuwa",
-    institution: "IBBAGAMUWA CENTRAL COLLEGE",
-    degree: "G.C.E. Advanced Level - Physical Science Stream",
-    period: "2021 - 2023",
-    status: "COMPLETED",
+    institution: "Ibbagamuwa Central College",
+    degree: "G.C.E. Advanced Level (Physical Science Stream)",
+    period: "2021 – 2023",
+    status: "Completed",
     highlights: [
-      "Advanced Physical Sciences",
-      "Higher Mathematics",
-      "Physics & Chemistry",
+      "Combined Mathematics",
+      "Physics",
+      "Chemistry",
     ],
   },
 ];
@@ -224,38 +192,38 @@ export const EDUCATION_DATA: EducationItem[] = [
 export const EXPERIENCE_DATA: ExperienceItem[] = [
   {
     id: "zentra",
-    company: "ZENTRA GYM",
+    company: "Zentra Gym",
     role: "Social Media Post Manager",
-    period: "2026 - PRESENT",
-    status: "ACTIVE",
-    highlights: ["Campaign Strategy", "Content Production", "Audience Engagement"],
-    description: "Manage official Facebook & digital channels, design dynamic sports motion carousels, and execute engagement campaigns driving high-ticket memberships.",
+    period: "2026 – Present",
+    status: "Current",
+    highlights: ["Social media campaign visuals", "Promotional workout graphics", "Brand consistency"],
+    description: "Design promotional graphics and workout carousels for Facebook and digital channels to support membership signups and client engagement.",
   },
   {
     id: "freelance",
-    company: "FREELANCE STUDIO",
-    role: "Freelance Graphic Designer",
-    period: "2025 - PRESENT",
-    status: "ACTIVE",
-    highlights: ["Brand Identity Systems", "Logo Engineering", "Vector Assets"],
-    description: "Collaborate directly with businesses to craft distinct visual identities, mathematical monograms, print-ready packaging, and web-ready vector collateral.",
+    company: "Freelance Design",
+    role: "Graphic & Logo Designer",
+    period: "2025 – Present",
+    status: "Current",
+    highlights: ["Logo design", "Brand identity packages", "Social media templates"],
+    description: "Work directly with small business owners to create memorable brand marks, vector logos, and social media marketing assets on schedule.",
   },
 ];
 
 export const LANGUAGES: LanguageItem[] = [
   {
-    name: "SINHALA",
-    proficiencyLabel: "(NATIVE / BILINGUAL)",
+    name: "Sinhala",
+    proficiencyLabel: "Native",
     percentage: 100,
-    fluencyStatus: "FLUENCY: COMPLETE",
-    color: "#b8a9e6",
+    fluencyStatus: "Native",
+    color: "#3B82F6",
   },
   {
-    name: "ENGLISH",
-    proficiencyLabel: "(PROFESSIONAL / ACADEMIC)",
+    name: "English",
+    proficiencyLabel: "Professional",
     percentage: 85,
-    fluencyStatus: "FLUENCY: ADVANCED PROFESSIONAL",
-    color: "#adc6ff",
+    fluencyStatus: "Professional Working Proficiency",
+    color: "#3B82F6",
   },
 ];
 

@@ -32,119 +32,96 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/85 backdrop-blur-xl"
+          className="absolute inset-0 bg-black/80"
         />
 
         {/* Modal Window */}
         <motion.div
-          initial={{ scale: 0.94, opacity: 0, y: 15 }}
+          initial={{ scale: 0.96, opacity: 0, y: 10 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.94, opacity: 0, y: 15 }}
-          transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+          exit={{ scale: 0.96, opacity: 0, y: 10 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
-          className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-2xl bg-surface-container-lowest border border-primary/30 shadow-[0_0_50px_rgba(30,155,255,0.3)] z-10 flex flex-col"
+          className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-lg bg-[#111620] border border-white/[0.08] shadow-2xl z-10 flex flex-col"
         >
           {/* Header */}
-          <div className="sticky top-0 z-20 flex items-center justify-between p-4 sm:p-5 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30">
-            <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
-              <span className="font-label-sm text-xs text-primary uppercase tracking-widest font-semibold">
-                CASE FILE // {project.id.toUpperCase()}
+          <div className="sticky top-0 z-20 flex items-center justify-between p-4 sm:p-5 bg-[#111620] border-b border-white/[0.08]">
+            <div className="flex items-center gap-2 text-xs font-label-sm">
+              <span className="text-blue-400 font-semibold uppercase tracking-wider">
+                {project.category}
               </span>
-              <span className="text-outline-variant text-xs">•</span>
-              <span className="font-label-sm text-xs text-on-surface-variant tracking-wider">
+              <span className="text-slate-500">•</span>
+              <span className="text-slate-400">
                 {project.year}
               </span>
             </div>
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer border border-outline-variant/30"
-              aria-label="Close Case File"
+              className="w-7 h-7 rounded-md bg-[#161D2B] hover:bg-[#1C2536] flex items-center justify-center text-slate-400 hover:text-white transition-colors cursor-pointer border border-white/[0.08]"
+              aria-label="Close dialog"
             >
-              <span className="material-symbols-outlined text-base">close</span>
+              <span className="text-sm">✕</span>
             </button>
           </div>
 
-          {/* Media / Code Snippet */}
-          {project.imageUrl ? (
-            <div className="relative w-full h-64 sm:h-80 bg-surface-container-low overflow-hidden">
+          {/* Media */}
+          {project.imageUrl && (
+            <div className="relative w-full h-64 sm:h-72 bg-[#0B0F17] overflow-hidden border-b border-white/[0.08]">
               <Image
                 src={project.imageUrl}
                 alt={project.title}
                 fill
-                sizes="(max-width: 1024px) 100vw, 768px"
+                sizes="(max-width: 1024px) 100vw, 680px"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 flex gap-2">
-                <span className="px-2.5 py-0.5 rounded-full bg-secondary-container/90 text-on-secondary font-label-sm text-[11px] tracking-widest font-semibold shadow-md">
-                  {project.badge}
-                </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-surface-container-high/90 text-primary font-label-sm text-[11px] tracking-wider">
-                  {project.metric}
-                </span>
-              </div>
-            </div>
-          ) : (
-            <div className="p-6 bg-surface-container-low font-mono text-xs text-on-surface-variant border-b border-outline-variant/20">
-              <div className="flex items-center justify-between text-primary font-label-sm pb-2">
-                <span>ppo_agent.py // SIMULATION LOG</span>
-                <span>EFFICIENCY: {project.metric}</span>
-              </div>
-              <p className="text-primary-container">def ppo_step(state, reward):</p>
-              <p className="pl-4">action_probs = policy_net(state)</p>
-              <p className="pl-4">surr1 = ratio * advantages</p>
-              <p className="pl-4">loss = -torch.min(surr1, surr2)</p>
             </div>
           )}
 
           {/* Details */}
           <div className="p-5 sm:p-6 flex flex-col gap-4">
             <div>
-              <span className="font-label-sm text-xs text-primary tracking-widest uppercase">
-                {project.subtitle}
-              </span>
+              <div className="text-xs font-label-sm text-slate-400 uppercase tracking-wider">
+                {project.client} — {project.role}
+              </div>
               <h3
                 id="modal-title"
-                className="font-headline-lg text-2xl sm:text-3xl text-on-surface tracking-wide mt-1"
+                className="font-headline-lg text-2xl sm:text-3xl text-slate-100 tracking-wide mt-1"
               >
                 {project.title}
               </h3>
             </div>
 
-            <p className="font-body-md text-xs sm:text-sm text-on-surface leading-relaxed">
+            <p className="font-body-md text-sm text-slate-300 leading-relaxed">
               {project.fullStory}
             </p>
 
-            {/* Tools & Deliverables */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-outline-variant/20">
-              <div className="flex flex-col gap-1.5">
-                <span className="font-label-sm text-[10px] text-outline uppercase tracking-wider">
-                  KEY DELIVERABLES
+            {/* Deliverables & Tools */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-white/[0.08]">
+              <div className="space-y-1.5">
+                <span className="block text-[11px] font-label-sm text-slate-400 uppercase tracking-wider">
+                  Key Deliverables
                 </span>
-                <div className="flex flex-wrap gap-1.5">
+                <ul className="space-y-1 text-xs text-slate-300">
                   {project.deliverables.map((item, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-0.5 rounded-md bg-surface-container-high text-[11px] font-label-sm text-on-surface border border-outline-variant/20"
-                    >
-                      {item}
-                    </span>
+                    <li key={idx} className="flex items-start gap-1.5">
+                      <span className="text-blue-400">•</span>
+                      <span>{item}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
 
-              <div className="flex flex-col gap-1.5">
-                <span className="font-label-sm text-[10px] text-outline uppercase tracking-wider">
-                  TOOLKIT
+              <div className="space-y-1.5">
+                <span className="block text-[11px] font-label-sm text-slate-400 uppercase tracking-wider">
+                  Tools &amp; Tech
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {project.techStack.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-0.5 rounded-md bg-primary-container/20 text-[11px] font-label-sm text-primary border border-primary/20"
+                      className="px-2.5 py-1 rounded bg-[#161D2B] text-[11px] font-label-sm text-slate-300 border border-white/[0.08]"
                     >
                       {tech}
                     </span>
@@ -153,39 +130,39 @@ export default function ProjectDetailModal({ project, onClose }: ProjectDetailMo
               </div>
             </div>
 
-            {/* Project Credit Line if collaborative */}
+            {/* Credit Note if collaborative */}
             {project.credit && (
-              <div className="p-3 rounded-xl bg-surface-container-high/60 border border-outline-variant/30 flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-primary text-base mt-0.5">group</span>
-                <div className="flex flex-col">
-                  <span className="font-label-sm text-[9px] text-outline uppercase tracking-wider">
-                    CREDIT
+              <div className="p-3.5 rounded-md bg-[#0F141E] border border-white/[0.08] flex items-start gap-2.5">
+                <div className="flex flex-col text-xs">
+                  <span className="font-label-sm text-[10px] text-slate-400 uppercase tracking-wider">
+                    Project Credit
                   </span>
-                  <span className="font-body-sm text-xs text-on-surface font-medium">
+                  <span className="text-slate-200 mt-0.5">
                     {project.credit}
                   </span>
                 </div>
               </div>
             )}
 
-            <div className="flex items-center justify-between pt-2 border-t border-outline-variant/20 gap-3">
+            {/* Actions */}
+            <div className="flex items-center justify-between pt-3 border-t border-white/[0.08]">
               {project.liveUrl ? (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-1.5 rounded-full bg-[#b8a9e6] hover:bg-[#cfbef5] text-[#1c0e4f] font-label-md text-xs tracking-wider font-bold shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-500 text-white font-label-md text-xs tracking-wider uppercase font-semibold transition-colors flex items-center gap-1.5"
                 >
-                  <span>LIVE DEMO</span>
-                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                  <span>Visit Live Site</span>
+                  <span>↗</span>
                 </a>
               ) : <div />}
 
               <button
                 onClick={onClose}
-                className="px-5 py-1.5 rounded-full bg-primary-container text-on-primary-container font-label-md text-xs tracking-wider font-bold shadow-md hover:bg-[#43aaff] transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-md bg-[#161D2B] hover:bg-[#1C2536] text-slate-300 hover:text-white font-label-md text-xs tracking-wider uppercase font-semibold border border-white/[0.08] transition-colors cursor-pointer"
               >
-                CLOSE
+                Close
               </button>
             </div>
           </div>

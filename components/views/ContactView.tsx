@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { PERSONAL_INFO, SOCIAL_LINKS } from '@/data/content';
-import CreativeCutouts from '@/components/contact/CreativeCutouts';
 
 export default function ContactView() {
   const [copied, setCopied] = useState(false);
@@ -11,7 +10,7 @@ export default function ContactView() {
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const getSocialIcon = (platform: string) => {
@@ -41,116 +40,83 @@ export default function ContactView() {
           </svg>
         );
       default:
-        return <span className="material-symbols-outlined text-base">alternate_email</span>;
+        return null;
     }
   };
 
   return (
-    <div className="relative w-full h-full max-w-5xl mx-auto flex flex-col justify-center items-center text-center p-4 sm:p-6 lg:p-8 select-none">
-      <CreativeCutouts />
-
-      {/* Telemetry Header */}
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high/80 backdrop-blur-md border border-outline-variant/30 mb-2 shadow-md">
-        <span className="w-1.5 h-1.5 rounded-full bg-secondary-container animate-ping" />
-        <span className="font-label-sm text-[11px] text-secondary uppercase tracking-[0.2em] font-semibold">
-          [ TRANSMISSION // COMMS HUB ]
-        </span>
-        <span className="text-outline-variant text-[9px]">•</span>
-        <span className="font-label-sm text-[11px] text-on-surface-variant tracking-widest">
-          ENCRYPTED END-TO-END
-        </span>
+    <div className="relative w-full h-full max-w-4xl mx-auto flex flex-col justify-center items-center text-center p-6 sm:p-10 lg:p-12">
+      {/* Small portrait */}
+      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden border border-white/[0.08] bg-[#111620] mb-5">
+        <Image
+          src={PERSONAL_INFO.portraitPath}
+          alt="Rashmi Vihara"
+          fill
+          sizes="96px"
+          className="object-cover object-top"
+        />
       </div>
 
-      <h2 className="font-headline-display text-4xl sm:text-6xl lg:text-7xl text-on-surface tracking-wider uppercase leading-none drop-shadow-md">
-        LET&apos;S INITIATE CONTACT
-      </h2>
-
-      <p className="font-body-md text-xs sm:text-sm text-on-surface-variant max-w-lg mt-1 tracking-wide">
-        Available for AI &amp; machine learning initiatives, freelance brand design, and creative direction.
-      </p>
-
-      {/* Circular Portrait Centerpiece with Rings */}
-      <div className="relative my-6 sm:my-8 flex items-center justify-center">
-        {/* Outer neon ring */}
-        <div className="absolute w-52 h-52 sm:w-64 sm:h-64 rounded-full border border-primary/20 animate-pulse pointer-events-none" />
-        <div className="absolute w-60 h-60 sm:w-72 sm:h-72 rounded-full border border-secondary/15 pointer-events-none" />
-
-        {/* Central Circular Portrait */}
-        <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-1.5 bg-gradient-to-br from-[#b8a9e6] via-[#1e9bff] to-[#d70357] shadow-[0_0_40px_rgba(30,155,255,0.35)]">
-          <div className="relative w-full h-full rounded-full overflow-hidden bg-surface-container-lowest">
-            <Image
-              src={PERSONAL_INFO.portraitPath}
-              alt="Rashmi Vihara Contact Portrait"
-              fill
-              sizes="180px"
-              className="object-cover object-top filter contrast-105"
-            />
-          </div>
-          <div className="absolute bottom-1 right-2 px-2 py-0.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md border border-primary/40 shadow-lg flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="font-label-sm text-[9px] text-primary tracking-widest uppercase font-bold">
-              OPEN
-            </span>
-          </div>
-        </div>
+      <div className="space-y-2 mb-6">
+        <h2 className="font-headline-display text-4xl sm:text-6xl text-slate-100 tracking-wider leading-none">
+          LET&apos;S WORK TOGETHER
+        </h2>
+        <p className="font-body-md text-sm sm:text-base text-slate-300 max-w-md mx-auto">
+          I am available for freelance brand design, logo commissions, and student internships in AI and software systems.
+        </p>
       </div>
 
-      {/* Symmetrical Social Icons */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 max-w-md mb-4">
-        {SOCIAL_LINKS.map((link) => (
-          <a
-            key={link.name}
-            href={link.url}
-            target={link.platform === 'email' ? '_self' : '_blank'}
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low/80 hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant/30 hover:border-primary/50 shadow-md hover:shadow-[0_0_15px_rgba(30,155,255,0.2)] transition-all duration-200 group text-xs font-label-md"
-          >
-            <span className="text-primary group-hover:scale-110 transition-transform">
-              {getSocialIcon(link.platform)}
-            </span>
-            <span className="tracking-wider uppercase font-semibold">{link.name}</span>
-          </a>
-        ))}
-      </div>
-
-      {/* Direct Email Address & One-Click Copy */}
-      <div className="flex items-center gap-2 p-1.5 rounded-xl bg-surface-container-lowest/80 border border-outline-variant/30 backdrop-blur-md shadow-lg max-w-sm w-full mb-4">
-        <div className="flex items-center gap-2 px-3 py-1 flex-1 justify-center sm:justify-start">
-          <span className="material-symbols-outlined text-primary text-sm">mail</span>
-          <span className="font-mono text-xs text-on-surface select-all">
+      {/* Email Box & One-Click Copy */}
+      <div className="flex items-center gap-2 p-1.5 rounded-lg bg-[#111620] border border-white/[0.08] max-w-md w-full mb-5">
+        <div className="flex items-center gap-2 px-3 py-1.5 flex-1 justify-center sm:justify-start">
+          <span className="text-slate-400 text-xs">✉</span>
+          <span className="font-mono text-xs sm:text-sm text-slate-200 select-all">
             {PERSONAL_INFO.email}
           </span>
         </div>
         <button
           onClick={handleCopyEmail}
           type="button"
-          className="px-3 py-1 rounded-lg bg-surface-container hover:bg-surface-bright text-[11px] font-label-md text-primary tracking-wider uppercase flex items-center gap-1 transition-colors cursor-pointer border border-outline-variant/20"
+          className="px-3.5 py-1.5 rounded bg-[#161D2B] hover:bg-[#1C2536] text-xs font-label-md text-slate-200 tracking-wider uppercase flex items-center gap-1.5 transition-colors cursor-pointer border border-white/[0.08]"
         >
-          <span className="material-symbols-outlined text-xs">
-            {copied ? 'check_circle' : 'content_copy'}
-          </span>
-          <span>{copied ? 'COPIED!' : 'COPY'}</span>
+          <span>{copied ? 'Copied' : 'Copy'}</span>
         </button>
       </div>
 
-      {/* Main HIRE ME Action Trigger Button & Signature */}
-      <div className="flex flex-col items-center gap-3">
+      {/* Main Mailto CTA */}
+      <div className="mb-6">
         <a
-          href={`mailto:${PERSONAL_INFO.email}?subject=Project%20Inquiry%20-%20Rashmi%20Vihara%20Portfolio`}
-          className="px-8 py-3 rounded-full bg-[#b8a9e6] hover:bg-[#cfbef5] text-[#1c0e4f] font-label-lg text-sm sm:text-base tracking-[0.25em] uppercase font-bold shadow-[0_0_25px_rgba(184,169,230,0.5)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer"
+          href={`mailto:${PERSONAL_INFO.email}?subject=Project%20Inquiry%20-%20Rashmi%20Vihara`}
+          className="px-8 py-3 rounded-md bg-blue-600 hover:bg-blue-500 text-white font-label-md text-xs sm:text-sm tracking-wider uppercase font-semibold transition-colors inline-flex items-center gap-2"
         >
-          <span>HIRE ME</span>
-          <span className="material-symbols-outlined text-lg">send</span>
+          <span>Email Me Directly</span>
+          <span>→</span>
         </a>
+      </div>
 
-        {/* THANK YOU 2026 Signature */}
-        <div className="flex items-center gap-2 text-outline-variant font-label-sm text-xs tracking-widest uppercase mt-1">
-          <span className="text-primary font-bold">THANK YOU</span>
-          <span>//</span>
-          <span>PORTFOLIO 2026</span>
-          <span>•</span>
-          <span className="text-on-surface-variant font-medium">COLOMBO, SRI LANKA</span>
-        </div>
+      {/* Social Links */}
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8">
+        {SOCIAL_LINKS.filter((l) => l.platform !== 'email').map((link) => (
+          <a
+            key={link.name}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-[#111620] hover:bg-[#161D2B] text-slate-300 hover:text-white border border-white/[0.08] hover:border-white/[0.16] transition-colors text-xs font-label-md"
+          >
+            <span className="text-blue-400">
+              {getSocialIcon(link.platform)}
+            </span>
+            <span>{link.name}</span>
+          </a>
+        ))}
+      </div>
+
+      {/* Grounded Closing Line (Replaces THANK YOU 2026) */}
+      <div className="pt-6 border-t border-white/[0.08] w-full max-w-md">
+        <p className="font-body-sm text-xs sm:text-sm text-slate-400">
+          Open to internships and design work. Email me.
+        </p>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 @tailwind base;
@@ -10,11 +10,13 @@
   body {
     margin: 0;
     padding: 0;
-    background-color: #10131c;
-    color: #e0e2ee;
-    scroll-behavior: smooth;
+    background-color: #0B0F17;
+    color: #E2E8F0;
     color-scheme: dark;
     font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
 
   body {
@@ -22,79 +24,63 @@
     overflow-x: hidden;
   }
 
-  /* Custom selection styles matching HUD aesthetic */
+  /* Clean accessible selection */
   ::selection {
-    background-color: #1e9bff;
-    color: #003158;
+    background-color: #1E3A8A;
+    color: #FFFFFF;
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #0a0e16;
+    background: #0B0F17;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #262a33;
-    border-radius: 9999px;
+    background: #1E293B;
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #3f4753;
+    background: #334155;
   }
 }
 
-/* Tactical HUD Grid Overlay */
-.hud-grid-pattern {
-  background-size: 32px 32px;
-  background-image: radial-gradient(rgba(184, 169, 230, 0.25) 1px, transparent 1px);
+/* 1px Hairline Border and Flat Surfaces */
+.hairline-border {
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Glassmorphism Classes */
-.glass-panel {
-  background: rgba(10, 14, 22, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(159, 202, 255, 0.14);
+.hairline-border-hover:hover {
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
-.glass-panel-hover:hover {
-  border-color: rgba(159, 202, 255, 0.45);
-  box-shadow: 0 0 28px rgba(30, 155, 255, 0.22);
+.card-surface {
+  background-color: #111620;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
 }
 
-.glass-pill {
-  background: rgba(16, 20, 32, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(63, 71, 83, 0.4);
+.card-surface-hover {
+  background-color: #111620;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Glow effects toggleable via glow state */
-.glow-enabled .hud-glow-primary {
-  box-shadow: 0 0 24px rgba(30, 155, 255, 0.35);
+.card-surface-hover:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  background-color: #141B26;
 }
 
-.glow-enabled .hud-glow-secondary {
-  box-shadow: 0 0 24px rgba(215, 3, 87, 0.35);
-}
-
-.glow-enabled .hud-glow-lavender {
-  box-shadow: 0 0 24px rgba(184, 169, 230, 0.4);
-}
-
-.glow-disabled .hud-glow-primary,
-.glow-disabled .hud-glow-secondary,
-.glow-disabled .hud-glow-lavender {
-  box-shadow: none !important;
-}
-
-.glow-disabled .ambient-glow-blur {
-  opacity: 0.1 !important;
-  filter: blur(60px) !important;
+/* Nav Capsule */
+.nav-pill-container {
+  background-color: #111620;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
 }
 
 @media (prefers-reduced-motion: reduce) {

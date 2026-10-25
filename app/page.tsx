@@ -26,7 +26,6 @@ export default function Home() {
       const nextIdx = TAB_ORDER.indexOf(nextTab);
       setDirection(nextIdx > currentIdx ? 1 : -1);
 
-      // Update URL hash without causing page jump
       if (typeof window !== 'undefined') {
         const targetHash = nextTab === 'splash' ? '' : `#${nextTab}`;
         if (window.location.hash !== targetHash) {
@@ -68,9 +67,7 @@ export default function Home() {
   // Mouse wheel debounced listener (one step per gesture)
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      // Ignore if user is inside a scrollable modal
       if ((e.target as HTMLElement)?.closest('[role="dialog"]')) return;
-
       if (isCooldown.current) return;
 
       if (Math.abs(e.deltaY) > 25) {
@@ -82,7 +79,7 @@ export default function Home() {
         }
         setTimeout(() => {
           isCooldown.current = false;
-        }, 500);
+        }, 400);
       }
     };
 
@@ -93,7 +90,6 @@ export default function Home() {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't intercept if inside an input or modal
       if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
       if ((e.target as HTMLElement)?.closest('[role="dialog"]')) return;
 
@@ -129,28 +125,26 @@ export default function Home() {
     touchStartX.current = null;
   };
 
-  // 400ms fade + 24px slide + soft blue glow pulse
+  // 250ms clean fade + 12px slide without glow pulse
   const variants = {
     initial: (dir: number) => ({
       opacity: 0,
-      x: dir * 24,
-      filter: 'drop-shadow(0 0 16px rgba(30,155,255,0.35))',
+      x: dir * 12,
     }),
     animate: {
       opacity: 1,
       x: 0,
-      filter: 'drop-shadow(0 0 0px rgba(30,155,255,0))',
       transition: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1],
+        duration: 0.25,
+        ease: 'easeOut',
       },
     },
     exit: (dir: number) => ({
       opacity: 0,
-      x: dir * -24,
+      x: dir * -12,
       transition: {
-        duration: 0.4,
-        ease: [0.16, 1, 0.3, 1],
+        duration: 0.25,
+        ease: 'easeIn',
       },
     }),
   };
@@ -159,7 +153,7 @@ export default function Home() {
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="relative w-full h-[100dvh] overflow-hidden flex flex-col justify-between"
+      className="relative w-full h-[100dvh] overflow-hidden flex flex-col justify-between bg-[#0B0F17]"
     >
       {/* Persistent Top Navigation Bar */}
       <TopPersistentNav activeTab={activeTab} onSelectTab={switchTab} />

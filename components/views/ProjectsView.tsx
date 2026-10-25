@@ -31,19 +31,19 @@ export default function ProjectsView() {
   };
 
   return (
-    <div className="w-full h-full max-w-7xl mx-auto flex flex-col justify-center p-4 sm:p-6 lg:p-8 select-none">
+    <div className="w-full h-full max-w-6xl mx-auto flex flex-col justify-center p-6 sm:p-10 lg:p-12">
       {/* Title & Filter Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2 mb-3 border-b border-outline-variant/20 gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between pb-3 mb-4 border-b border-white/[0.08] gap-3">
         <div>
-          <span className="font-label-sm text-xs text-primary tracking-widest uppercase">
-            [ ARCHIVES // 2026 DEPLOYMENT ]
-          </span>
-          <h2 className="font-headline-display text-4xl sm:text-5xl text-on-surface tracking-wider leading-none mt-0.5">
-            PROJECT SHOWCASE DECK
+          <h2 className="font-headline-display text-4xl sm:text-5xl text-slate-100 tracking-wider leading-none">
+            SELECTED PROJECTS
           </h2>
+          <p className="font-body-sm text-xs sm:text-sm text-slate-400 mt-1">
+            Work in brand identity, social campaigns, and computing coursework.
+          </p>
         </div>
 
-        {/* Filter Pills */}
+        {/* Clean Filter Pills */}
         <div className="flex items-center gap-1.5 self-start sm:self-auto">
           {categories.map((cat) => {
             const isActive = activeCategory === cat;
@@ -54,10 +54,10 @@ export default function ProjectsView() {
                   setActiveCategory(cat);
                   setCurrentIndex(0);
                 }}
-                className={`px-3 py-1 rounded-full font-label-md text-xs tracking-wider uppercase transition-all cursor-pointer border ${
+                className={`px-3.5 py-1.5 rounded-full font-label-md text-xs tracking-wider uppercase transition-colors cursor-pointer border ${
                   isActive
-                    ? 'bg-[#b8a9e6] text-[#1c0e4f] border-[#b8a9e6] font-bold shadow-[0_0_15px_rgba(184,169,230,0.5)]'
-                    : 'bg-surface-container-low text-on-surface-variant hover:text-on-surface border-outline-variant/30'
+                    ? 'bg-blue-600 text-white border-blue-600 font-semibold'
+                    : 'bg-[#111620] text-slate-400 hover:text-slate-200 border-white/[0.08]'
                 }`}
               >
                 {cat}
@@ -67,13 +67,13 @@ export default function ProjectsView() {
         </div>
       </div>
 
-      {/* Card Deck Carousel Container */}
-      <div className="relative w-full flex-1 max-h-[62vh] flex items-center justify-center overflow-hidden my-auto py-2">
+      {/* Featured Project Showcase Container */}
+      <div className="relative w-full flex-1 max-h-[62vh] flex items-center justify-center my-auto py-2">
         {/* Peeking Left Card */}
         {filteredProjects.length > 1 && (
-          <div
+          <button
             onClick={handlePrev}
-            className="hidden sm:block absolute left-2 lg:left-8 w-64 md:w-80 h-72 md:h-88 rounded-2xl bg-surface-container-lowest/70 border border-outline-variant/30 shadow-xl opacity-35 hover:opacity-75 transition-all duration-300 transform -translate-x-12 scale-90 cursor-pointer overflow-hidden z-10"
+            className="hidden lg:block absolute left-0 w-72 h-80 rounded-lg bg-[#111620] border border-white/[0.08] opacity-40 hover:opacity-75 transition-opacity transform -translate-x-6 scale-95 cursor-pointer overflow-hidden z-10 text-left"
             title={`Previous: ${prevProject.title}`}
           >
             {prevProject.imageUrl ? (
@@ -82,119 +82,124 @@ export default function ProjectsView() {
                   src={prevProject.imageUrl}
                   alt={prevProject.title}
                   fill
-                  sizes="320px"
+                  sizes="300px"
                   className="object-cover filter grayscale contrast-125"
                 />
-                <div className="absolute inset-0 bg-black/60" />
+                <div className="absolute inset-0 bg-[#0B0F17]/70" />
+                <div className="absolute bottom-3 left-3 right-3 p-2 rounded bg-[#111620]/90 border border-white/[0.08]">
+                  <span className="font-headline-sm text-xs text-slate-200 truncate block">
+                    {prevProject.title}
+                  </span>
+                </div>
               </div>
             ) : (
-              <div className="p-4 bg-surface-container-lowest font-mono text-[10px] text-outline">
+              <div className="p-4 text-xs text-slate-400">
                 {prevProject.title}
               </div>
             )}
-            <div className="absolute bottom-3 left-3 right-3 p-2 rounded bg-surface-container/90 backdrop-blur-md">
-              <span className="font-headline-sm text-xs text-on-surface truncate block">
-                {prevProject.title}
-              </span>
-            </div>
-          </div>
+          </button>
         )}
 
-        {/* Center Featured Card */}
+        {/* Main Center Featured Card */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeProject.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setModalProject(activeProject)}
-            className="relative z-20 w-full max-w-lg md:max-w-2xl rounded-2xl bg-surface-container-lowest/90 border border-primary/40 shadow-[0_0_35px_rgba(30,155,255,0.22)] overflow-hidden cursor-pointer group hover:border-primary transition-all duration-300"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="relative z-20 w-full max-w-2xl rounded-lg bg-[#111620] border border-white/[0.08] hover:border-white/[0.16] transition-colors overflow-hidden flex flex-col"
           >
-            {/* Card Media Area */}
+            {/* Project Image */}
             {activeProject.imageUrl ? (
-              <div className="relative w-full h-48 sm:h-64 md:h-72 bg-surface-container-low overflow-hidden">
+              <div
+                onClick={() => setModalProject(activeProject)}
+                className="relative w-full h-48 sm:h-64 bg-[#0B0F17] overflow-hidden cursor-pointer group"
+              >
                 <Image
                   src={activeProject.imageUrl}
                   alt={activeProject.title}
                   fill
                   priority
                   sizes="(max-width: 768px) 100vw, 680px"
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center group-hover:scale-102 transition-transform duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent opacity-85" />
-
-                {/* Badges */}
-                <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
-                  <span
-                    className={`px-2.5 py-0.5 rounded-full font-label-sm text-[11px] tracking-widest font-semibold shadow-md ${
-                      activeProject.accent === 'secondary'
-                        ? 'bg-secondary-container text-on-secondary'
-                        : 'bg-primary-container text-on-primary-container'
-                    }`}
-                  >
+                {/* Subtle caption overlay badge */}
+                <div className="absolute top-3 left-3 flex items-center gap-2">
+                  <span className="px-2.5 py-1 rounded bg-[#111620]/90 text-slate-200 font-label-sm text-[11px] tracking-wider border border-white/[0.08]">
                     {activeProject.badge}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-surface-container-highest/90 text-primary font-label-sm text-[11px] tracking-wider">
-                    {activeProject.metric}
-                  </span>
                 </div>
-
-                <div className="absolute top-3 right-3 z-10">
-                  <span className="w-8 h-8 rounded-full bg-surface-container-highest/80 backdrop-blur-md flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
-                    <span className="material-symbols-outlined text-base">north_east</span>
+                <div className="absolute bottom-3 right-3">
+                  <span className="px-3 py-1 rounded bg-[#111620]/90 text-blue-400 font-label-sm text-xs font-medium border border-white/[0.08] group-hover:text-blue-300">
+                    Click to view details ↗
                   </span>
                 </div>
               </div>
             ) : (
-              <div className="p-5 bg-surface-container-low font-mono text-[11px] text-on-surface-variant border-b border-outline-variant/20">
-                <div className="flex items-center justify-between text-primary font-label-sm pb-1">
-                  <span>ppo_agent.py</span>
-                  <span className="text-on-surface-variant/70">{activeProject.metric}</span>
-                </div>
-                <p className="text-primary-container">def ppo_step(state, reward):</p>
-                <p className="pl-3">action_probs = policy_net(state)</p>
-                <p className="pl-3">loss = -torch.min(surr1, surr2)</p>
+              <div
+                onClick={() => setModalProject(activeProject)}
+                className="p-6 bg-[#0F141E] border-b border-white/[0.08] cursor-pointer"
+              >
+                <span className="px-2.5 py-1 rounded bg-[#161D2B] text-blue-400 font-label-sm text-[11px] tracking-wider border border-white/[0.08]">
+                  {activeProject.badge}
+                </span>
               </div>
             )}
 
-            {/* Card Content Footer */}
-            <div className="p-4 sm:p-5 flex flex-col gap-2 bg-surface-container-lowest">
-              <div className="flex items-center justify-between">
-                <span className="font-label-sm text-[11px] text-primary tracking-widest uppercase">
-                  {activeProject.subtitle}
+            {/* Plain Caption & Content: Client, Year, What She Did */}
+            <div className="p-5 flex flex-col gap-2">
+              <div className="flex items-center justify-between text-xs font-label-sm text-slate-400">
+                <span className="font-semibold text-blue-400 uppercase tracking-wider">
+                  {activeProject.client}
                 </span>
-                <span className="font-label-sm text-[10px] text-on-surface-variant/70 tracking-widest">
-                  {activeProject.year}
-                </span>
+                <span>{activeProject.year}</span>
               </div>
 
-              <h3 className="font-headline-lg text-2xl sm:text-3xl text-on-surface tracking-wide group-hover:text-primary transition-colors leading-tight">
+              <h3
+                onClick={() => setModalProject(activeProject)}
+                className="font-headline-lg text-2xl sm:text-3xl text-slate-100 tracking-wide cursor-pointer hover:text-blue-400 transition-colors"
+              >
                 {activeProject.title}
               </h3>
 
-              <p className="font-body-md text-xs sm:text-sm text-on-surface-variant line-clamp-2">
+              <p className="font-body-md text-xs sm:text-sm text-slate-300 line-clamp-2">
                 {activeProject.description}
               </p>
 
-              <div className="flex flex-col gap-1.5 pt-2 border-t border-outline-variant/20 text-xs font-label-sm">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-on-surface-variant truncate">
-                    <span>DELIVERABLES:</span>
-                    <span className="text-on-surface font-semibold truncate max-w-[180px] sm:max-w-xs">
-                      {activeProject.deliverables.join(' • ')}
-                    </span>
-                  </div>
-                  <span className="text-[#b8a9e6] font-bold tracking-wider flex items-center gap-1 shrink-0">
-                    EXPAND CASE
-                    <span className="material-symbols-outlined text-sm">visibility</span>
-                  </span>
+              {/* Collaborative Credit Line */}
+              {activeProject.credit && (
+                <div className="mt-1 pt-2 border-t border-white/[0.08] text-xs text-slate-400 flex items-center gap-1.5">
+                  <span className="text-slate-300 font-medium">Credit:</span>
+                  <span>{activeProject.credit}</span>
                 </div>
-                {activeProject.credit && (
-                  <div className="text-[10px] text-outline flex items-center gap-1 truncate">
-                    <span className="text-primary font-semibold">Credit:</span> {activeProject.credit}
-                  </div>
-                )}
+              )}
+
+              {/* Bottom Row: Actions */}
+              <div className="mt-2 pt-2 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                <span className="text-slate-400">
+                  Role: <strong className="text-slate-200 font-medium">{activeProject.role}</strong>
+                </span>
+
+                <div className="flex items-center gap-2">
+                  {activeProject.liveUrl && (
+                    <a
+                      href={activeProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1"
+                    >
+                      <span>Live link</span>
+                      <span>↗</span>
+                    </a>
+                  )}
+                  <button
+                    onClick={() => setModalProject(activeProject)}
+                    className="text-slate-300 hover:text-white font-medium ml-2 cursor-pointer"
+                  >
+                    View story →
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -202,9 +207,9 @@ export default function ProjectsView() {
 
         {/* Peeking Right Card */}
         {filteredProjects.length > 1 && (
-          <div
+          <button
             onClick={handleNext}
-            className="hidden sm:block absolute right-2 lg:right-8 w-64 md:w-80 h-72 md:h-88 rounded-2xl bg-surface-container-lowest/70 border border-outline-variant/30 shadow-xl opacity-35 hover:opacity-75 transition-all duration-300 transform translate-x-12 scale-90 cursor-pointer overflow-hidden z-10"
+            className="hidden lg:block absolute right-0 w-72 h-80 rounded-lg bg-[#111620] border border-white/[0.08] opacity-40 hover:opacity-75 transition-opacity transform translate-x-6 scale-95 cursor-pointer overflow-hidden z-10 text-left"
             title={`Next: ${nextProject.title}`}
           >
             {nextProject.imageUrl ? (
@@ -213,59 +218,56 @@ export default function ProjectsView() {
                   src={nextProject.imageUrl}
                   alt={nextProject.title}
                   fill
-                  sizes="320px"
+                  sizes="300px"
                   className="object-cover filter grayscale contrast-125"
                 />
-                <div className="absolute inset-0 bg-black/60" />
+                <div className="absolute inset-0 bg-[#0B0F17]/70" />
+                <div className="absolute bottom-3 left-3 right-3 p-2 rounded bg-[#111620]/90 border border-white/[0.08]">
+                  <span className="font-headline-sm text-xs text-slate-200 truncate block">
+                    {nextProject.title}
+                  </span>
+                </div>
               </div>
             ) : (
-              <div className="p-4 bg-surface-container-lowest font-mono text-[10px] text-outline">
+              <div className="p-4 text-xs text-slate-400">
                 {nextProject.title}
               </div>
             )}
-            <div className="absolute bottom-3 left-3 right-3 p-2 rounded bg-surface-container/90 backdrop-blur-md">
-              <span className="font-headline-sm text-xs text-on-surface truncate block">
-                {nextProject.title}
-              </span>
-            </div>
-          </div>
+          </button>
         )}
       </div>
 
-      {/* Carousel Navigation Strip */}
-      <div className="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+      {/* Navigation Controls Strip */}
+      <div className="flex items-center justify-between pt-3 border-t border-white/[0.08]">
         {/* Counter */}
-        <div className="flex items-center gap-2 font-label-sm text-xs text-on-surface-variant">
-          <span className="text-primary font-bold">
+        <div className="flex items-center gap-2 font-label-sm text-xs text-slate-400">
+          <span className="text-blue-400 font-semibold">
             {String(safeIndex + 1).padStart(2, '0')}
           </span>
           <span>/</span>
           <span>{String(filteredProjects.length).padStart(2, '0')}</span>
-          <span className="text-outline text-[10px] ml-2 hidden sm:inline">
-            [CLICK CARD TO EXPAND]
-          </span>
         </div>
 
-        {/* Controls */}
+        {/* Previous / Next Buttons */}
         <div className="flex items-center gap-2">
           <button
             onClick={handlePrev}
-            className="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-primary transition-all border border-outline-variant/30 cursor-pointer"
-            aria-label="Previous Project"
+            className="px-3 py-1 rounded bg-[#111620] hover:bg-[#161D2B] text-slate-300 hover:text-white font-label-md text-xs border border-white/[0.08] transition-colors cursor-pointer"
+            aria-label="Previous project"
           >
-            <span className="material-symbols-outlined text-sm">chevron_left</span>
+            ← Previous
           </button>
           <button
             onClick={handleNext}
-            className="w-9 h-9 rounded-full bg-surface-container hover:bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-primary transition-all border border-outline-variant/30 cursor-pointer"
-            aria-label="Next Project"
+            className="px-3 py-1 rounded bg-[#111620] hover:bg-[#161D2B] text-slate-300 hover:text-white font-label-md text-xs border border-white/[0.08] transition-colors cursor-pointer"
+            aria-label="Next project"
           >
-            <span className="material-symbols-outlined text-sm">chevron_right</span>
+            Next →
           </button>
         </div>
       </div>
 
-      {/* Lightbox / Detail Modal */}
+      {/* Project Lightbox / Detail Modal */}
       <ProjectDetailModal
         project={modalProject}
         onClose={() => setModalProject(null)}
