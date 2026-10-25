@@ -5,42 +5,42 @@ import { AI_SKILLS_LIST, DESIGN_SKILLS_LIST, LANGUAGES_TEXT_LIST } from '@/data/
 
 export default function SkillsView() {
   return (
-    <div className="w-full h-full max-w-6xl mx-auto flex flex-col justify-center p-6 sm:p-10 lg:p-12">
+    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start py-2 sm:py-6 gap-5">
       {/* Section Header */}
-      <div className="w-full pb-3 mb-6 border-b border-white/[0.08] flex items-baseline justify-between">
+      <div className="w-full pb-3 border-b border-white/[0.08] flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
         <div>
-          <h2 className="font-headline-display text-4xl sm:text-5xl text-slate-100 tracking-wider leading-none">
+          <h2 className="font-headline-display text-[clamp(2.25rem,6vw,3.75rem)] text-slate-100 tracking-wider leading-[0.95]">
             SKILLS &amp; TOOLS
           </h2>
-          <p className="font-body-sm text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="font-body-md text-sm sm:text-base text-slate-400 mt-1">
             Technologies and software used in university computing and client brand design.
           </p>
         </div>
-        <span className="hidden sm:inline font-label-sm text-xs text-blue-400 font-medium">
+        <span className="font-label-sm text-xs sm:text-sm text-blue-400 font-medium">
           SLIIT AI &amp; Freelance
         </span>
       </div>
 
-      {/* Two Column Plain Text List (No percentages, no bars) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      {/* Two Column Plain Text List (Single column stack on mobile, 2 col on md+) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start w-full">
         {/* GROUP 1: AI & Computing */}
-        <div className="p-6 rounded-lg bg-[#111620] border border-white/[0.08] space-y-4">
+        <div className="p-4 sm:p-6 rounded-lg bg-[#111620] border border-white/[0.08] space-y-4 w-full">
           <div className="pb-3 border-b border-white/[0.08] flex items-center justify-between">
-            <h3 className="font-headline-sm text-lg text-slate-100 tracking-wide">
+            <h3 className="font-headline-sm text-lg sm:text-xl text-slate-100 tracking-wide">
               AI &amp; Computing
             </h3>
-            <span className="font-label-sm text-[11px] text-blue-400">
+            <span className="font-label-sm text-xs text-blue-400">
               Academic &amp; Development
             </span>
           </div>
 
           <div className="space-y-4">
             {AI_SKILLS_LIST.map((skill) => (
-              <div key={skill.id} className="space-y-0.5">
-                <div className="text-sm font-semibold text-slate-200">
+              <div key={skill.id} className="space-y-1">
+                <div className="text-sm sm:text-base font-semibold text-slate-200">
                   {skill.name}
                 </div>
-                <div className="font-body-sm text-xs sm:text-sm text-slate-400">
+                <div className="font-body-md text-sm sm:text-base text-slate-400 leading-relaxed">
                   {skill.description}
                 </div>
               </div>
@@ -49,23 +49,23 @@ export default function SkillsView() {
         </div>
 
         {/* GROUP 2: Design & Brand Identity */}
-        <div className="p-6 rounded-lg bg-[#111620] border border-white/[0.08] space-y-4">
+        <div className="p-4 sm:p-6 rounded-lg bg-[#111620] border border-white/[0.08] space-y-4 w-full">
           <div className="pb-3 border-b border-white/[0.08] flex items-center justify-between">
-            <h3 className="font-headline-sm text-lg text-slate-100 tracking-wide">
+            <h3 className="font-headline-sm text-lg sm:text-xl text-slate-100 tracking-wide">
               Design &amp; Brand Identity
             </h3>
-            <span className="font-label-sm text-[11px] text-blue-400">
+            <span className="font-label-sm text-xs text-blue-400">
               Client &amp; Studio Practice
             </span>
           </div>
 
           <div className="space-y-4">
             {DESIGN_SKILLS_LIST.map((skill) => (
-              <div key={skill.id} className="space-y-0.5">
-                <div className="text-sm font-semibold text-slate-200">
+              <div key={skill.id} className="space-y-1">
+                <div className="text-sm sm:text-base font-semibold text-slate-200">
                   {skill.name}
                 </div>
-                <div className="font-body-sm text-xs sm:text-sm text-slate-400">
+                <div className="font-body-md text-sm sm:text-base text-slate-400 leading-relaxed">
                   {skill.description}
                 </div>
               </div>
@@ -75,12 +75,12 @@ export default function SkillsView() {
       </div>
 
       {/* Languages & Working Setup Footer */}
-      <div className="mt-5 p-4 rounded-lg bg-[#111620] border border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-slate-300 font-label-md uppercase tracking-wider">
+      <div className="p-4 sm:p-5 rounded-lg bg-[#111620] border border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 w-full">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs sm:text-sm font-semibold text-slate-300 font-label-md uppercase tracking-wider">
             Languages:
           </span>
-          <div className="flex items-center gap-4 text-xs text-slate-400">
+          <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-400">
             {LANGUAGES_TEXT_LIST.map((lang) => (
               <span key={lang.name}>
                 <strong className="text-slate-200">{lang.name}</strong> ({lang.level})
@@ -89,7 +89,7 @@ export default function SkillsView() {
           </div>
         </div>
 
-        <div className="text-xs text-slate-400">
+        <div className="text-xs sm:text-sm text-slate-400">
           Tools: macOS, Adobe Creative Cloud, VS Code, Git
         </div>
       </div>
