@@ -11,9 +11,9 @@ interface SplashViewProps {
 
 export default function SplashView({ onSelectTab }: SplashViewProps) {
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col justify-between py-2 sm:py-6 gap-6">
+    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start sm:justify-between py-0 gap-6">
       {/* Responsive Grid: Stacks on mobile, 12-col on desktop */}
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center my-auto">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
         {/* Portrait: On mobile max-h-[35dvh] at top, on desktop left column */}
         <div className="lg:col-span-5 flex justify-center lg:justify-start">
           <div className="relative w-full max-w-[240px] sm:max-w-[280px] lg:max-w-none lg:w-80 h-[30dvh] sm:h-[35dvh] lg:h-[26rem] max-h-[35dvh] lg:max-h-none rounded-lg bg-[#111620] border border-white/[0.08] overflow-hidden shrink-0">

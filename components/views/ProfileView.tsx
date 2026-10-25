@@ -11,11 +11,11 @@ interface ProfileViewProps {
 
 export default function ProfileView({ onSelectTab }: ProfileViewProps) {
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start py-2 sm:py-6 gap-5">
+    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start py-0 gap-4 sm:gap-5">
       {/* Section Header */}
       <div className="w-full pb-3 border-b border-white/[0.08] flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
         <div>
-          <h2 className="font-headline-display text-[clamp(2.25rem,6vw,3.75rem)] text-slate-100 tracking-wider leading-[0.95]">
+          <h2 className="font-headline-display text-[clamp(2rem,5vw,3.5rem)] text-slate-100 tracking-wider leading-[0.95] pt-0.5">
             ABOUT &amp; BACKGROUND
           </h2>
           <p className="font-body-md text-sm sm:text-base text-slate-400 mt-1">
@@ -32,7 +32,7 @@ export default function ProfileView({ onSelectTab }: ProfileViewProps) {
         {/* Left Column: Portrait & Quick Stats */}
         <div className="lg:col-span-4 flex flex-col gap-4 w-full">
           {/* Portrait: Max 35dvh on mobile, natural on desktop */}
-          <div className="relative w-full max-w-[240px] sm:max-w-[280px] lg:max-w-none mx-auto lg:mx-0 h-[30dvh] sm:h-[35dvh] lg:h-[22rem] max-h-[35dvh] lg:max-h-none rounded-lg overflow-hidden bg-[#111620] border border-white/[0.08] shrink-0">
+          <div className="relative w-full max-w-[240px] sm:max-w-[280px] lg:max-w-none mx-auto lg:mx-0 h-[30dvh] sm:h-[35dvh] lg:h-[19.5rem] max-h-[35dvh] lg:max-h-none rounded-lg overflow-hidden bg-[#111620] border border-white/[0.08] shrink-0">
             <Image
               src={PERSONAL_INFO.portraitPath}
               alt="Rashmi Vihara"

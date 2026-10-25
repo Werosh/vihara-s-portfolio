@@ -31,11 +31,11 @@ export default function ProjectsView() {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start py-2 sm:py-6 gap-5">
+    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start py-0 gap-4 sm:gap-5">
       {/* Title & Filter Bar */}
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between pb-3 border-b border-white/[0.08] gap-3">
         <div>
-          <h2 className="font-headline-display text-[clamp(2.25rem,6vw,3.75rem)] text-slate-100 tracking-wider leading-[0.95]">
+          <h2 className="font-headline-display text-[clamp(2rem,5vw,3.5rem)] text-slate-100 tracking-wider leading-[0.95] pt-0.5">
             SELECTED PROJECTS
           </h2>
           <p className="font-body-md text-sm sm:text-base text-slate-400 mt-1">

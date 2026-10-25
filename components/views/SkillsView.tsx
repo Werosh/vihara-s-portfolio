@@ -5,11 +5,11 @@ import { AI_SKILLS_LIST, DESIGN_SKILLS_LIST, LANGUAGES_TEXT_LIST } from '@/data/
 
 export default function SkillsView() {
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start py-2 sm:py-6 gap-5">
+    <div className="w-full max-w-6xl mx-auto flex flex-col justify-start py-0 gap-4 sm:gap-5">
       {/* Section Header */}
       <div className="w-full pb-3 border-b border-white/[0.08] flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
         <div>
-          <h2 className="font-headline-display text-[clamp(2.25rem,6vw,3.75rem)] text-slate-100 tracking-wider leading-[0.95]">
+          <h2 className="font-headline-display text-[clamp(2rem,5vw,3.5rem)] text-slate-100 tracking-wider leading-[0.95] pt-0.5">
             SKILLS &amp; TOOLS
           </h2>
           <p className="font-body-md text-sm sm:text-base text-slate-400 mt-1">
@@ -22,9 +22,9 @@ export default function SkillsView() {
       </div>
 
       {/* Two Column Plain Text List (Single column stack on mobile, 2 col on md+) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 items-start w-full">
         {/* GROUP 1: AI & Computing */}
-        <div className="p-4 sm:p-6 rounded-lg bg-[#111620] border border-white/[0.08] space-y-4 w-full">
+        <div className="p-4 sm:p-5 rounded-lg bg-[#111620] border border-white/[0.08] space-y-3 sm:space-y-3.5 w-full">
           <div className="pb-3 border-b border-white/[0.08] flex items-center justify-between">
             <h3 className="font-headline-sm text-lg sm:text-xl text-slate-100 tracking-wide">
               AI &amp; Computing
@@ -49,7 +49,7 @@ export default function SkillsView() {
         </div>
 
         {/* GROUP 2: Design & Brand Identity */}
-        <div className="p-4 sm:p-6 rounded-lg bg-[#111620] border border-white/[0.08] space-y-4 w-full">
+        <div className="p-4 sm:p-5 rounded-lg bg-[#111620] border border-white/[0.08] space-y-3 sm:space-y-3.5 w-full">
           <div className="pb-3 border-b border-white/[0.08] flex items-center justify-between">
             <h3 className="font-headline-sm text-lg sm:text-xl text-slate-100 tracking-wide">
               Design &amp; Brand Identity

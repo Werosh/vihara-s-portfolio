@@ -180,7 +180,7 @@ export default function Home() {
       <main
         ref={mainRef}
         id="main-content"
-        className="app-main-viewport flex flex-col items-center"
+        className="app-main-viewport"
       >
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
@@ -190,7 +190,7 @@ export default function Home() {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-full min-h-full flex flex-col justify-start md:justify-center p-4 sm:p-6 lg:p-8"
+            className="w-full min-h-full flex flex-col justify-start px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12 max-w-6xl mx-auto"
           >
             {activeTab === 'splash' && <SplashView onSelectTab={switchTab} />}
             {activeTab === 'profile' && <ProfileView onSelectTab={switchTab} />}

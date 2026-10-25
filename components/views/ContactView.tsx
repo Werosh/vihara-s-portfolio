@@ -39,7 +39,7 @@ export default function ContactView() {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto flex flex-col justify-start items-center text-center py-2 sm:py-6 gap-5">
+    <div className="relative w-full max-w-4xl mx-auto flex flex-col justify-start items-center text-center py-0 gap-4 sm:gap-5">
       {/* Small portrait */}
       <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden border border-white/[0.08] bg-[#111620] shrink-0">
         <Image
@@ -52,7 +52,7 @@ export default function ContactView() {
       </div>
 
       <div className="space-y-1.5 max-w-xl">
-        <h2 className="font-headline-display text-[clamp(2.25rem,6.5vw,4.25rem)] text-slate-100 tracking-wider leading-[0.95]">
+        <h2 className="font-headline-display text-[clamp(2rem,5.5vw,3.75rem)] text-slate-100 tracking-wider leading-[0.95] pt-0.5">
           LET&apos;S WORK TOGETHER
         </h2>
         <p className="font-body-md text-sm sm:text-base text-slate-300 leading-relaxed max-w-md mx-auto">
